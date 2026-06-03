@@ -1,0 +1,14 @@
+.venv/
+.venv-test/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.uv/
+uv.lock
+
+# Secrets — never commit real keys. Keep the template tracked.
+.env
+.env.*
+!.env.example

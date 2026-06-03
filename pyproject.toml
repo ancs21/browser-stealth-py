@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "browser-stealth-py"
+version = "0.2.0"
+description = "Standalone stealth browser fetching (Chromium via patchright) extracted from Scrapling."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "An Pham", email = "ancs21.ps@gmail.com" }]
+maintainers = [{ name = "An Pham", email = "ancs21.ps@gmail.com" }]
+keywords = ["scraping", "stealth", "playwright", "patchright", "cloudflare", "anti-bot", "fingerprint"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "playwright==1.59.0",
+    "patchright==1.59.1",
+    "browserforge>=1.2.4",
+    "msgspec>=0.21.1",
+]
+
+[project.optional-dependencies]
+# Convenience parsers for the returned HTML; the core package is parser-free.
+parse = ["lxml>=5.0", "parsel>=1.9"]
+
+[project.urls]
+"Upstream (Scrapling)" = "https://github.com/D4Vinci/Scrapling"
+
+[tool.setuptools]
+packages = ["browser_stealth"]
+
+[tool.setuptools.package-data]
+browser_stealth = ["py.typed"]
