@@ -27,8 +27,8 @@ classifiers = [
     "Topic :: Software Development :: Testing",
 ]
 dependencies = [
-    "playwright==1.59.0",
-    "patchright==1.59.1",
+    "playwright==1.60.0",
+    "patchright==1.60.1",
     "browserforge>=1.2.4",
     "msgspec>=0.21.1",
 ]
@@ -36,6 +36,10 @@ dependencies = [
 [project.optional-dependencies]
 # Convenience parsers for the returned HTML; the core package is parser-free.
 parse = ["lxml>=5.0", "parsel>=1.9"]
+
+[dependency-groups]
+# Dev-only tooling (not a published extra). Installed automatically by `uv run`.
+dev = ["pytest>=9.0.3"]
 
 [project.urls]
 "Upstream (Scrapling)" = "https://github.com/D4Vinci/Scrapling"
@@ -45,3 +49,7 @@ packages = ["browser_stealth"]
 
 [tool.setuptools.package-data]
 browser_stealth = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
