@@ -36,7 +36,8 @@ from browser_stealth import StealthyFetcher
 
 UPSTREAM_HOST = "proxy.spider.cloud"
 UPSTREAM_PORT = 8888
-PROXY_PARAMS = "proxy=residential&country_code=US"  # pool + geo; see spider.cloud docs
+# pool + geo; see spider.cloud docs. Country defaults to US; override e.g. PROXY_COUNTRY=VN.
+PROXY_PARAMS = f"proxy=residential&country_code={os.environ.get('PROXY_COUNTRY', 'US')}"
 IP_ECHO = "https://api.ipify.org?format=json"
 
 
