@@ -52,4 +52,8 @@ browser_stealth = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra"
+# Keep the default run browser-free and fast; opt into e2e with `-m e2e`.
+addopts = "-ra -m 'not e2e'"
+markers = [
+    "e2e: end-to-end tests that launch a real Chromium browser (needs `patchright install chromium`)",
+]

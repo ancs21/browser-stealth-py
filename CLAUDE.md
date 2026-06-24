@@ -136,12 +136,20 @@ context override stays effective.
 no browser, network, or Chromium binary. `pytest` (latest, `>=9`) lives in the
 `[dependency-groups] dev` group and is installed automatically by `uv run`.
 
-The actual fetch path (`StealthySession.fetch`, the Cloudflare solver, `convertor`) is
-**deliberately not tested here** — exercising it needs the ~150 MB Chromium binary plus
-live network, i.e. a "large" integration test, not a unit test. Note the tests pin only
-the **sync** side of each sync/async pair (e.g. `create_intercept_handler`, not its async
-mirror), so the "edit both" rule above still applies — a green suite does not prove the
-async mirror changed too.
+`test_e2e.py` is a separate **end-to-end** layer that drives the real Chromium stack
+(`fetcher → _session → _base → navigation → convertor → response`) against a local
+stdlib `http.server` — no external network, deterministic assertions. It's tagged with
+the `e2e` marker and **excluded from the default run** (`addopts = "-m 'not e2e'"`), so
+`uv run pytest` stays fast and browser-free. Opt in with `uv run pytest -m e2e` (needs
+the Chromium binary; the suite skips itself cleanly if it isn't installed). It covers
+both the sync and async public entry points, so it *does* catch sync/async fetch-path
+drift — but the pure-unit files below still pin only the sync side.
+
+The Cloudflare solver and per-call proxy *rotation* remain untested (they'd need a live
+challenge / multiple real proxies). And the unit files pin only the **sync** side of each
+sync/async pair (e.g. `create_intercept_handler`, not its async mirror), so the "edit
+both" rule above still applies — a green unit suite does not prove the async mirror
+changed too.
 
 ### Response construction
 
