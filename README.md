@@ -169,6 +169,20 @@ browser_stealth/
   _page.py          PagePool / PageInfo
 ```
 
+## Tests
+
+A small `pytest` suite covers the parser-free, browser-free logic — proxy rotation,
+`Response`/status mapping, proxy & domain normalization, config validation, and the
+logger:
+
+```bash
+uv run pytest
+```
+
+`pytest` is installed automatically by `uv run` (it lives in the `dev` dependency group).
+The suite intentionally doesn't drive a real browser — those paths need the Chromium
+binary and live network.
+
 ## Credits & license
 
 The stealth engine, browser flags, and Cloudflare solver originate from
